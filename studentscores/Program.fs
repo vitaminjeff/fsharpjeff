@@ -10,8 +10,9 @@ let printMeanScore (row : string) =
    let meanScore =
       elements
       |> Array.skip 2
-      |> Array.map float
-      |> Array.average
+      // |> Array.map float
+      // |> Array.average
+      |> Array.averageBy float
    printfn "%s\t%s\t%0.1f" name id meanScore
 
 let summarize filePath =
