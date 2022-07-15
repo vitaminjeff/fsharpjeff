@@ -43,7 +43,8 @@ let main argv =
 
     // indexBasedForLoop argv
     // iteratorBasedForLoop argv
-    argv |> arrayIterBasedNonForLoop
+    let validNames = argv |> Array.filter isValid
+    validNames |> arrayIterBasedNonForLoop
     printfn "Nice to meet you."
     0
 
