@@ -7,9 +7,14 @@ open System // like using in C#
 
 let sayHello person =
     printfn "Hello %s from my F# program!" person
+    // the return type of this function "unit" is a type that can only ever have one value
+    // a necessary concept for functions that do something but don't meaningfully return anything
 
 let isValid person =
-    not(String.IsNullOrWhiteSpace person)
+    String.IsNullOrWhiteSpace person |> not
+
+let isAllowed person =
+    person <> "Eve"
 
 let indexBasedForLoop (argv : string[]) =
     for i in 0..argv.Length-1 do
@@ -45,6 +50,7 @@ let main argv =
     // iteratorBasedForLoop argv
     argv 
     |> Array.filter isValid 
+    |> Array.filter isAllowed 
     |> arrayIterBasedNonForLoop
     printfn "Nice to meet you."
     0
