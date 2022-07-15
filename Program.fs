@@ -43,7 +43,7 @@ let main argv =
 
     // indexBasedForLoop argv
     // iteratorBasedForLoop argv
-    arrayIterBasedNonForLoop argv
+    argv |> arrayIterBasedNonForLoop
     printfn "Nice to meet you."
     0
 
