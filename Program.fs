@@ -8,6 +8,9 @@ open System // like using in C#
 let sayHello person =
     printfn "Hello %s from my F# program!" person
 
+let isValid person =
+    not(String.IsNullOrWhiteSpace person)
+
 let indexBasedForLoop (argv : string[]) =
     for i in 0..argv.Length-1 do
         let person = argv.[0]
@@ -18,7 +21,9 @@ let iteratorBasedForLoop (argv : string[]) =
         sayHello person
 
 let arrayIterBasedNonForLoop (argv : string[]) =
-    Array.iter sayHello argv
+    // forward piping operator |> 
+    // take the value before me and provide it as the last argument to the function after me
+    argv |> Array.iter sayHello
 
 [<EntryPoint>] // attributes use compound brackets [<>], tells .net where to start
 let main argv =
@@ -39,6 +44,7 @@ let main argv =
     // indexBasedForLoop argv
     // iteratorBasedForLoop argv
     arrayIterBasedNonForLoop argv
+    printfn "Nice to meet you."
     0
 
 // let declares or "binds" a value or function w/ a name
