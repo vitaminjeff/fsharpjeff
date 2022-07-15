@@ -5,6 +5,21 @@
 
 open System // like using in C#
 
+let sayHello person =
+    printfn "Hello %s from my F# program!" person
+
+let indexBasedForLoop (argv : string[]) =
+    for i in 0..argv.Length-1 do
+        let person = argv.[0]
+        sayHello person
+
+let iteratorBasedForLoop (argv : string[]) =
+    for person in argv do
+        sayHello person
+
+let arrayIterBasedNonForLoop (argv : string[]) =
+    Array.iter sayHello argv
+
 [<EntryPoint>] // attributes use compound brackets [<>], tells .net where to start
 let main argv =
     // let person = argv.[0]
@@ -15,16 +30,16 @@ let main argv =
     //     person <- argv.[0]
 
     // minimize the use of mutable values
-    let person = 
-        if argv.Length > 0 then
-            argv.[0]
-        else
-            "Anonymous Person"
+    // let person = 
+    //     if argv.Length > 0 then
+    //         argv.[0]
+    //     else
+    //         "Anonymous Person"
 
-    printfn "Hello %s from F#!" person
-    // printfn "Explicit Hello World from F#!" // print formatted w/ newline
-    // printfn "The args are: %A" argv // print formatted w/ newline
-    0 // return an integer exit code
+    // indexBasedForLoop argv
+    // iteratorBasedForLoop argv
+    arrayIterBasedNonForLoop argv
+    0
 
 // let declares or "binds" a value or function w/ a name
 
