@@ -11,10 +11,21 @@ module Float =
       else
          Some (float s)
 
-   let fromStringOr (d : float) (s : string) : float =
+   // curried paraeters
+   // let fromStringOr d s : float =
+
+   // tupled parameters
+   // let fromStringOr (d, s) : float =
+   let fromStringOr (d, s) : float =
       s
       |> tryFromString
       |> Option.defaultValue d
+
+   // tuple (*) of two ints
+   // let t = (99, 100)
+
+   // tuple (*) of int, float, and string
+   // let u = (99, 3.1, "abc")
 
 type Student =
    {
@@ -45,7 +56,7 @@ module Student =
          |> Array.skip 2
          // |> Array.map Float.tryFromString
          // |> Array.choose Float.tryFromString // combined mapping and filtering operation, just takes Some values
-         |> Array.map (Float.fromStringOr 50.0)
+         |> Array.map (fun s -> Float.fromStringOr (50.0, s))
       let meanScore = scores |> Array.average
       let minScore = scores |> Array.min
       let maxScore = scores |> Array.max
