@@ -52,9 +52,8 @@ module Student =
          // |> Array.map Float.tryFromString
          // |> Array.choose Float.tryFromString // combined mapping and filtering operation, just takes Some values
          // |> Array.map (fun s -> Float.fromStringOr (50.0, s))
-         // |> Array.map TestResult.fromString
-         // |> Array.choose TestResult.tryEffectiveScore
-         |> Array.map (Float.fromStringOr 50.)
+         |> Array.map TestResult.fromString
+         |> Array.choose TestResult.tryEffectiveScore
       let meanScore = scores |> Array.average
       let minScore = scores |> Array.min
       let maxScore = scores |> Array.max
