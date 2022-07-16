@@ -17,12 +17,20 @@ module Student =
       let elements = s.Split(',')
       elements.[i].Trim()
 
+   let nameParts (s : string) =
+      let elements = s.Split(',')
+      let surname = elements.[0].Trim()
+      let givenName = elements.[1].Trim()
+      // (surname, givenName) // tuple brackets optional
+      surname, givenName
+
    let fromString (s : string) =
       let elements = s.Split('\t')
       let name = elements.[0]
       // Inefficient, splitting name string twice
-      let given = namePart 1 name
-      let sur = namePart 0 name
+      // let given = namePart 1 name
+      // let sur = namePart 0 name
+      let sur, given = name |> nameParts
       let id = elements.[1]
       let scores =
          elements
