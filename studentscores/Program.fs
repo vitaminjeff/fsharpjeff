@@ -49,7 +49,7 @@ let summarize filePath =
    // Sort by mean score (descending)
    // Print each Student instance
    |> Array.map Student.fromString
-   |> Array.sortByDescending getSortKey
+   |> Array.sortByDescending (fun student -> student.MeanScore)
    |> Array.iter Student.printSummary
 
 [<EntryPoint>]
