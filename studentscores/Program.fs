@@ -29,7 +29,8 @@ module Student =
       let scores =
          elements
          |> Array.skip 2
-         |> Array.map float
+         // |> Array.map Float.tryFromString
+         |> Array.choose Float.tryFromString // combined mapping and filtering operation, just takes Some values
       let meanScore = scores |> Array.average
       let minScore = scores |> Array.min
       let maxScore = scores |> Array.max
@@ -42,7 +43,7 @@ module Student =
       }
 
    let printSummary (student : Student) =
-      printfn "%s\t%s\t%0.1f\t%0.1f\t%0.1f" student.Name student.Id student.MeanScore student.MinScore student.MaxScore
+      printfn "%s\t\t%s\t%0.1f\t%0.1f\t%0.1f" student.Name student.Id student.MeanScore student.MinScore student.MaxScore
 
 let getSortKey (student : Student) = student.MeanScore
 
