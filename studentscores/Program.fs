@@ -20,6 +20,10 @@ let main argv =
             printfn "Error: %s" e.Message
             printfn "The file was not in the expected format."
             1
+         | :? IOException as e ->
+            printfn "Error: %s" e.Message
+            printfn "The file is open in another program, please close it."
+            1
       else
          printfn "File not found: %s" filePath
          2
