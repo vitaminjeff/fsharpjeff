@@ -3,6 +3,14 @@
 open System
 open System.IO
 
+module Float =
+
+   let tryFromString s =
+      if s = "N/A" then
+         None
+      else
+         Some (float s)
+
 type Student =
    {
       Name : string
