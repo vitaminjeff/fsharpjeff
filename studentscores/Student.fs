@@ -24,13 +24,24 @@ module Student =
       // (surname, givenName) // tuple brackets optional
       surname, givenName
 
+   let namePartsPatternMatched (s : string) =
+      let elements = s.Split(',')
+      // make sure to cover all cases or
+      // Microsoft.FSharp.Core.MatchFailureException: The match cases were incomplete
+      match elements with
+      | [|surname; givenName|] ->
+         surname.Trim(), givenName.Trim()
+      | _ -> 
+         raise (System.FormatException(sprintf "Invalid name format: \"%s\"" s))
+
+
    let fromString (s : string) =
       let elements = s.Split('\t')
       let name = elements.[0]
       // Inefficient, splitting name string twice
       // let given = namePart 1 name
       // let sur = namePart 0 name
-      let sur, given = name |> nameParts
+      let sur, given = name |> namePartsPatternMatched
       let id = elements.[1]
       let scores =
          elements
