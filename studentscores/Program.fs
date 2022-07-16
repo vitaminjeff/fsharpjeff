@@ -5,13 +5,13 @@ open System.IO
 
 module Float =
 
-   let tryFromString s =
+   let tryFromString (s : string) : float option =
       if s = "N/A" then
          None
       else
          Some (float s)
 
-   let fromStringOr d s=
+   let fromStringOr (d : float) (s : string) : float =
       s
       |> tryFromString
       |> Option.defaultValue d
