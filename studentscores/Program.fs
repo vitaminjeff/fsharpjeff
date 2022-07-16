@@ -17,17 +17,20 @@ let main argv =
             0
          with
          | :? FormatException as e ->
-            printfn "Error: %s" e.Message
+            printfn "Error: %s" e.StackTrace
             printfn "The file was not in the expected format."
             1
          | :? IOException as e ->
             printfn "Error: %s" e.Message
             printfn "The file is open in another program, please close it."
-            1
+            2
+         | _ as e ->
+            printfn "Unexpected Error: %s" e.Message
+            3
       else
          printfn "File not found: %s" filePath
-         2
+         4
    else
       printfn "Please specify a file"
-      3
+      5
 
