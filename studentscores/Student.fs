@@ -30,9 +30,13 @@ module Student =
       // Microsoft.FSharp.Core.MatchFailureException: The match cases were incomplete
       match elements with
       | [|surname; givenName|] ->
-         surname.Trim(), givenName.Trim()
+         // use anonymous record syntax to
+         // avoid the field position dependency of tuples
+         {| Surname = surname.Trim()
+            GivenName = givenName.Trim() |}
       | [|surname|] ->
-         surname.Trim(), "(None)"
+         {| Surname = surname.Trim()
+            GivenName = "(None)" |}
       | _ -> 
          raise (System.FormatException(sprintf "Invalid name format: \"%s\"" s))
 
@@ -40,10 +44,7 @@ module Student =
    let fromString (s : string) =
       let elements = s.Split('\t')
       let name = elements.[0]
-      // Inefficient, splitting name string twice
-      // let given = namePart 1 name
-      // let sur = namePart 0 name
-      let sur, given = name |> namePartsPatternMatched
+      let processedName = elements.[0] |> namePartsPatternMatched
       let id = elements.[1]
       let scores =
          elements
@@ -58,8 +59,8 @@ module Student =
       let maxScore = scores |> Array.max
       {
          Name = name
-         Surname = sur
-         GivenName = given
+         Surname = processedName.Surname
+         GivenName = processedName.GivenName
          Id = id
          MeanScore = meanScore
          MinScore = minScore
