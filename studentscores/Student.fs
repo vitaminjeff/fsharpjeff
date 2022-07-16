@@ -31,6 +31,8 @@ module Student =
       match elements with
       | [|surname; givenName|] ->
          surname.Trim(), givenName.Trim()
+      | [|surname|] ->
+         surname.Trim(), "(None)"
       | _ -> 
          raise (System.FormatException(sprintf "Invalid name format: \"%s\"" s))
 
