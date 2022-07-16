@@ -16,7 +16,8 @@ let main argv =
             Summary.summarize filePath
             0
          with
-         | :? FormatException ->
+         | :? FormatException as e ->
+            printfn "Error: %s" e.Message
             printfn "The file was not in the expected format."
             1
       else
