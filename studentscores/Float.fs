@@ -2,21 +2,21 @@ namespace StudentScores
 
 module Float =
 
-   let tryFromString (s : string) : float option =
+   let tryFromString (s : string) =
       if s = "N/A" then
-         None
+         Nothing
       else
-         Some (float s)
+         Something (float s)
 
    // curried paraeters
    // let fromStringOr d s : float =
 
    // tupled parameters
    // let fromStringOr (d, s) : float =
-   let fromStringOr (d, s) : float =
+   let fromStringOr d s =
       s
       |> tryFromString
-      |> Option.defaultValue d
+      |> Optional.defaultValue d
 
    // tuple (*) of two ints
    // let t = (99, 100)
